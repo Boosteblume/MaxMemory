@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    container_name: memories_db
+    environment:
+      POSTGRES_USER: memories_user
+      POSTGRES_PASSWORD: memories_password
+      POSTGRES_DB: memories
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U memories_user -d memories"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

@@ -1,0 +1,31 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Memory {
+    id          Int    @id @default(autoincrement())
+    // Text
+    title       String
+    description String
+
+    // File path
+    imagePath String
+
+    // Geolocation
+    latitude     Float?
+    longitude    Float?
+    locationName String?
+    fullAdress String?
+    city String?
+    country String?
+    postalCode String?
+
+    // Timestamps
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
